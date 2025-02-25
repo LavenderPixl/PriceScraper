@@ -27,7 +27,7 @@ def get_html(url):
         return BeautifulSoup(html.content, "html.parser")
 
 
-def get_products(sp: BeautifulSoup):
+def get_products(sp: BeautifulSoup) -> list[list[str]]:
     products = []
     for child_soup in sp.find_all("ul", {"id": "product-list"}):
         title = child_soup.find('h2').text
@@ -39,10 +39,9 @@ def get_products(sp: BeautifulSoup):
 
 def write_to_csv(sp: list[list[str]]):
     with open(file_name, 'w') as csv_file:
-        fieldnames = ['Name', 'Price']
-        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-        writer.writeheader()
+        writer = csv.writer(csv_file)
         writer.writerows(sp)
+
 
 startup_csv()
 soup = get_html("https://www.scrapingcourse.com/ecommerce/")
