@@ -5,7 +5,7 @@ import os.path
 import requests
 import csv
 
-file_name = "ProshopProducts.csv"
+file_name = "Products.csv"
 
 
 # Create a CSV file if it does not already exist.
