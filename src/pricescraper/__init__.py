@@ -30,10 +30,11 @@ def get_html(url):
 def get_products(sp: BeautifulSoup) -> list[list[str]]:
     products = []
     for child_soup in sp.find_all("ul", {"id": "product-list"}):
-        title = child_soup.find('h2').text
-        price = child_soup.find('span').text
+        for child in child_soup.find_all("li"):
+            title = child.find('h2').text
+            price = child.find('span').text
 
-        products.append([title, price])
+            products.append([title, price])
     return products
 
 
